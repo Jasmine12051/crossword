@@ -115,6 +115,8 @@ public class DAOFactory extends SQLiteOpenHelper {
                     if (fields.length == CSV_DATA_FIELDS) {
 
                         params = new HashMap<>();
+
+                        params.put(properties.getProperty("sql_field_puzzleid"), String.valueOf(puzzleid));
                         params.put(properties.getProperty("sql_field_row"), fields[0]);
                         params.put(properties.getProperty("sql_field_column"), fields[1]);
                         params.put(properties.getProperty("sql_field_box"), fields[2]);

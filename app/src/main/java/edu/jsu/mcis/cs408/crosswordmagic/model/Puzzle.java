@@ -118,7 +118,7 @@ public class Puzzle {
         if (across != null) {
             if (across.getWord().equals(guess) && !(guessed.contains(acrossKey))) {
                 result = WordDirection.ACROSS;
-                addWordToGuessed(downKey);
+                addWordToGuessed(acrossKey);
             }
         }
 

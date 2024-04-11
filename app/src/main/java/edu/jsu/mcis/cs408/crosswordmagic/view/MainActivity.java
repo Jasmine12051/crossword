@@ -3,7 +3,6 @@ package edu.jsu.mcis.cs408.crosswordmagic.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import java.beans.PropertyChangeEvent;
@@ -54,10 +53,14 @@ public class MainActivity extends AppCompatActivity implements AbstractView {
 
         if (name.equals(CrosswordMagicController.TEST_PROPERTY)) {
 
-            binding.output.setText("Number of Words in Default Puzzle: " + value);
+            //binding.output.setText("Number of Words in Default Puzzle: " + value);
 
         }
 
+    }
+
+    public CrosswordMagicController getController(){
+        return controller;
     }
 
 }

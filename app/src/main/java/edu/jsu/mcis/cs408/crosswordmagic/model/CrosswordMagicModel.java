@@ -29,4 +29,18 @@ public class CrosswordMagicModel extends AbstractModel {
 
     }
 
+    public void getGridDimensions(){
+        int height = puzzle.getHeight();
+        int width = puzzle.getWidth();
+        Integer[] dimensions = new Integer[2];
+        dimensions[0] = height;
+        dimensions[1] = width;
+
+        Log.d("Testing", "gridDimension Height: " + dimensions[0]);
+
+
+        firePropertyChange(CrosswordMagicController.GRID_DIMENSION_PROPERTY, null, dimensions);
+
+    }
+
 }

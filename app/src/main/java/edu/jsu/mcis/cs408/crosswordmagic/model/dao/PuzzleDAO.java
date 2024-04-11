@@ -75,6 +75,8 @@ public class PuzzleDAO {
 
     public Puzzle find(SQLiteDatabase db, int id) {
 
+        WordDAO wordDao = daoFactory.getWordDAO();
+
         /* use this method if there is NOT already a SQLiteDatabase open */
 
         Puzzle puzzle = null;
@@ -84,8 +86,6 @@ public class PuzzleDAO {
 
         if (cursor.moveToFirst()) {
 
-            cursor.moveToFirst();
-
             HashMap<String, String> params = new HashMap<>();
 
             params.put("_id", cursor.getString(0));
@@ -94,8 +94,8 @@ public class PuzzleDAO {
             params.put("height", cursor.getString(3));
             params.put("width", cursor.getString(4));
 
-            if (!params.isEmpty())
-                puzzle = new Puzzle(params);
+            puzzle = new Puzzle(params);
+
             /* get list of words (if any) to add to puzzle */
 
             query = daoFactory.getProperty("sql_get_words");
@@ -103,15 +103,13 @@ public class PuzzleDAO {
 
             if (cursor.moveToFirst()) {
 
-                cursor.moveToFirst();
-
                 do {
 
-                    params = new HashMap<>();
+                    int wordid = Integer.parseInt(cursor.getString(0));
 
+                    Word word = wordDao.find(db, wordid);
 
-                    if (!params.isEmpty())
-                        puzzle.addWordToPuzzle(new Word(params));
+                    puzzle.addWordToPuzzle(word);
 
                 }
                 while ( cursor.moveToNext() );
@@ -127,15 +125,12 @@ public class PuzzleDAO {
 
             if (cursor.moveToFirst()) {
 
-                cursor.moveToFirst();
-
                 do {
 
                     Integer box = cursor.getInt(4);
                     WordDirection direction = WordDirection.values()[cursor.getInt(5)];
 
-                    if (puzzle != null)
-                        puzzle.addWordToGuessed(box + direction.toString());
+                    puzzle.addWordToGuessed(box + direction.toString());
 
                 }
                 while ( cursor.moveToNext() );
