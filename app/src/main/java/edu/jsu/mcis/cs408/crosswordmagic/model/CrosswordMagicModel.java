@@ -1,7 +1,6 @@
 package edu.jsu.mcis.cs408.crosswordmagic.model;
 
 import android.content.Context;
-import android.util.Log;
 
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.DAOFactory;
@@ -36,11 +35,28 @@ public class CrosswordMagicModel extends AbstractModel {
         dimensions[0] = height;
         dimensions[1] = width;
 
-        Log.d("Testing", "gridDimension Height: " + dimensions[0]);
+        firePropertyChange(CrosswordMagicController.GRID_DIMENSIONS_PROPERTY, null, dimensions);
 
+    }
 
-        firePropertyChange(CrosswordMagicController.GRID_DIMENSION_PROPERTY, null, dimensions);
+    public void getGridNumbers(){
+        Integer [][] numbers = puzzle.getNumbers();
+        firePropertyChange(CrosswordMagicController.GRID_NUMBERS_PROPERTY, null, numbers);
 
+    }
+
+    public void getGridLetters(){
+        Character [][] letters = puzzle.getLetters();
+        firePropertyChange(CrosswordMagicController.GRID_LETTERS_PROPERTY, null, letters);
+
+    }
+
+    public void getCluesAcross() {
+        firePropertyChange(CrosswordMagicController.CLUES_ACROSS_PROPERTY, null, puzzle.getCluesAcross());
+    }
+
+    public void getCluesDown() {
+        firePropertyChange(CrosswordMagicController.CLUES_DOWN_PROPERTY, null, puzzle.getCluesDown());
     }
 
 }

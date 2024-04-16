@@ -9,7 +9,6 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -17,10 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import java.beans.PropertyChangeEvent;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 
@@ -61,9 +57,9 @@ public class CrosswordGridView extends View implements AbstractView {
 
         controller.addView(this);
 
-       //controller.getGridDimensions();
-       // controller.getGridLetters();
-       // controller.getGridNumbers();
+       controller.getGridDimensions();
+       controller.getGridLetters();
+       controller.getGridNumbers();
 
     }
 
@@ -231,12 +227,12 @@ public class CrosswordGridView extends View implements AbstractView {
 
 
     @Override
-    public void modelPropertyChange(final PropertyChangeEvent evt) {
+   public void modelPropertyChange(final PropertyChangeEvent evt) {
 
         String name = evt.getPropertyName();
         Object value = evt.getNewValue();
 
-        if (name.equals(CrosswordMagicController.GRID_LETTERS_PROPERTY)) {
+       if (name.equals(CrosswordMagicController.GRID_LETTERS_PROPERTY)) {
 
             if (value instanceof Character[][]) {
 
@@ -260,11 +256,12 @@ public class CrosswordGridView extends View implements AbstractView {
 
         }
 
-        if (name.equals(CrosswordMagicController.GRID_DIMENSION_PROPERTY)) {
+        if (name.equals(CrosswordMagicController.GRID_DIMENSIONS_PROPERTY)) {
 
             if (value instanceof Integer[]) {
 
                 Integer[] dimension = (Integer[]) value;
+
 
                 this.gridHeight = dimension[0];
                 this.gridWidth = dimension[1];
