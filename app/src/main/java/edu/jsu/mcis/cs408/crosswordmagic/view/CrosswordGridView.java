@@ -1,16 +1,20 @@
 package edu.jsu.mcis.cs408.crosswordmagic.view;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.text.InputType;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -18,6 +22,7 @@ import androidx.annotation.NonNull;
 import java.beans.PropertyChangeEvent;
 import java.util.Locale;
 
+import edu.jsu.mcis.cs408.crosswordmagic.R;
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 
 public class CrosswordGridView extends View implements AbstractView {
@@ -277,12 +282,12 @@ public class CrosswordGridView extends View implements AbstractView {
     private class OnTouchHandler implements View.OnTouchListener {
 
         private Context context;
+        private String userInput;
 
         public OnTouchHandler(Context context) {
             this.context = context;
         }
 
-        @SuppressLint("ClickableViewAccessibility")
         @Override
         public boolean onTouch(View view, MotionEvent event) {
 
@@ -296,8 +301,31 @@ public class CrosswordGridView extends View implements AbstractView {
                 int n = numbers[y][x];
 
                 if (n != 0) {
-                    String text = String.format(Locale.getDefault(),"X: %d, Y: %d, Box: %d", x, y, n);
-                    Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+                    String text = String.format(Locale.getDefault(), "X: %d, Y: %d, Box: %d", x, y, n);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context); // Changed 'this' to 'context'
+                    builder.setTitle(R.string.dialog_title);
+                    builder.setMessage(R.string.dialog_message);
+                    final EditText input = new EditText(context); // Changed 'this' to 'context'
+                    input.setInputType(InputType.TYPE_CLASS_TEXT);
+                    builder.setView(input);
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) { // Changed 'd' to 'dialog' and 'i' to 'which'
+                            userInput = input.getText().toString();
+
+                            controller.setUserInput(userInput);
+                            controller.setSelectedBox(n);
+                        }
+                    });
+                    builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) { // Changed 'd' to 'dialog' and 'i' to 'which'
+                            userInput = "";
+                            dialog.cancel();
+                        }
+                    });
+                    AlertDialog aboutDialog = builder.create(); // Changed 'builder.show()' to 'builder.create()'
+                    aboutDialog.show(); // Show the dialog after creating it
                 }
 
             }

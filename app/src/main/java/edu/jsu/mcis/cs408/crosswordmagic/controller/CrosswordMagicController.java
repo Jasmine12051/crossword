@@ -1,5 +1,9 @@
 package edu.jsu.mcis.cs408.crosswordmagic.controller;
 
+import android.util.Log;
+
+import edu.jsu.mcis.cs408.crosswordmagic.model.CrosswordMagicModel;
+
 public class CrosswordMagicController extends AbstractController {
 
     public static final String TEST_PROPERTY = "TestProperty";
@@ -9,7 +13,10 @@ public class CrosswordMagicController extends AbstractController {
 
     public static final String CLUES_ACROSS_PROPERTY = "CluesAcross";
     public static final String CLUES_DOWN_PROPERTY = "CluesDown";
+    public static final String USER_INPUT_PROPERTY = "UserInput";
+    public static final String SELECTED_BOX_PROPERTY = "SelectedBox";
 
+    public static final String USER_GUESS_PROPERTY = "userGuess";
     public void getTestProperty(String value) {
         getModelProperty(TEST_PROPERTY);
     }
@@ -33,5 +40,12 @@ public class CrosswordMagicController extends AbstractController {
     public void getCluesDown() {
         getModelProperty(CLUES_DOWN_PROPERTY);
     }
+
+
+    public void setUserInput(String value){
+        setModelProperty(USER_INPUT_PROPERTY, value);}
+
+    public void setSelectedBox(int n){
+        setModelProperty(SELECTED_BOX_PROPERTY, n);}
 
 }

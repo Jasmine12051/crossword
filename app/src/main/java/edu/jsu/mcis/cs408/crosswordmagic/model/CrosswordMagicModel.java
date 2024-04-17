@@ -11,6 +11,8 @@ public class CrosswordMagicModel extends AbstractModel {
     private final int DEFAULT_PUZZLE_ID = 1;
 
     private Puzzle puzzle;
+    private String userInput;
+    private int selectedBox;
 
     public CrosswordMagicModel(Context context) {
 
@@ -58,5 +60,18 @@ public class CrosswordMagicModel extends AbstractModel {
     public void getCluesDown() {
         firePropertyChange(CrosswordMagicController.CLUES_DOWN_PROPERTY, null, puzzle.getCluesDown());
     }
+
+    public void setUserInput(String userInput) {
+        String oldValue = this.userInput;
+        this.userInput = userInput;
+        firePropertyChange(CrosswordMagicController.USER_INPUT_PROPERTY, oldValue, userInput);
+    }
+
+    public void setSelectedBox(int selectedBox) {
+        int oldValue = this.selectedBox;
+        this.selectedBox = selectedBox;
+        firePropertyChange(CrosswordMagicController.SELECTED_BOX_PROPERTY, oldValue, selectedBox);
+    }
+
 
 }
