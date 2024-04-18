@@ -11,6 +11,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import android.content.Context;
 
+import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
+
 public class Puzzle {
 
 
@@ -132,8 +134,10 @@ public class Puzzle {
             if (across.getWord().equals(guess) && !(guessed.contains(acrossKey))) {
                 result = WordDirection.ACROSS;
                 addWordToGuessed(acrossKey);
-                Toast toast = Toast.makeText(context, "Congratulations! You guessed correctly!", Toast.LENGTH_SHORT);
-                toast.show();
+                Log.d("testing", "you answer was right (across)");
+                //Toast toast = Toast.makeText(context, "Congratulations! You guessed correctly!", Toast.LENGTH_SHORT);
+                //toast.show();
+
 
             }
         }
@@ -142,9 +146,9 @@ public class Puzzle {
             if (down.getWord().equals(guess) && !(guessed.contains(downKey))) {
                 result = WordDirection.DOWN;
                 addWordToGuessed(downKey);
-                Log.d("testing", "you answer was right");
-                Toast toast = Toast.makeText(context, "Congratulations! You guessed correctly!", Toast.LENGTH_LONG);
-                toast.show();
+                Log.d("testing", "you answer was right (down)");
+                //Toast toast = Toast.makeText(context, "Congratulations! You guessed correctly!", Toast.LENGTH_SHORT);
+                //toast.show();
             }
         }
 

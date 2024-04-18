@@ -17,7 +17,8 @@ public class CrosswordMagicController extends AbstractController {
     public static final String CLUES_DOWN_PROPERTY = "CluesDown";
     public static final String USER_INPUT_PROPERTY = "UserInput";
     public static final String SELECTED_BOX_PROPERTY = "SelectedBox";
-    private static final String GUESS_PROPERTY = "Guess";
+    public static final String GUESS_PROPERTY = "Guess";
+    public static final String PUZZLE_LIST_PROPERTY = "PuzzleList";
 
     public void getTestProperty(String value) {
         getModelProperty(TEST_PROPERTY);
@@ -43,8 +44,13 @@ public class CrosswordMagicController extends AbstractController {
         getModelProperty(CLUES_DOWN_PROPERTY);
     }
 
+    public void getPuzzleList() {
+        getModelProperty(PUZZLE_LIST_PROPERTY);
+    }
+
     public void setGuess(HashMap<String, String> params) {
-        setModelProperty(GUESS_PROPERTY, params); }
+        setModelProperty(GUESS_PROPERTY, params);
+    }
 
 
     public void setUserInput(String value){

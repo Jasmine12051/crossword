@@ -72,6 +72,10 @@ public class DAOFactory extends SQLiteOpenHelper {
         return new WordDAO(this);
     }
 
+    public GuessDAO getGuessDAO() {
+        return new GuessDAO(this);
+    }
+
     public String getProperty(String key) {
         return (properties.getProperty(key));
     }
@@ -86,6 +90,7 @@ public class DAOFactory extends SQLiteOpenHelper {
 
             WordDAO wordDAO = getWordDAO();
             PuzzleDAO puzzleDAO = getPuzzleDAO();
+            GuessDAO guessDAO = getGuessDAO();
 
             BufferedReader br = new BufferedReader(new InputStreamReader(context.getResources().openRawResource(R.raw.puzzle)));
             CSVParser parser = (new CSVParserBuilder()).withSeparator('\t').withIgnoreQuotations(true).build();

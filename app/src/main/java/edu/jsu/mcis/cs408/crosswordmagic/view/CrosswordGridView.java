@@ -63,9 +63,9 @@ public class CrosswordGridView extends View implements AbstractView {
 
         controller.addView(this);
 
-       controller.getGridDimensions();
-       controller.getGridLetters();
-       controller.getGridNumbers();
+        controller.getGridDimensions();
+        controller.getGridLetters();
+        controller.getGridNumbers();
 
     }
 
@@ -277,6 +277,24 @@ public class CrosswordGridView extends View implements AbstractView {
             }
 
         }
+
+        if (name.equals(CrosswordMagicController.GUESS_PROPERTY)) {
+
+            if (value instanceof Integer) {
+
+                Integer id = (Integer) value;
+                String message = getResources().getString(id);
+
+                Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+                toast.show();
+
+                invalidate();
+
+            }
+
+        }
+
+        // Toast toast = Toast.makeText(context, "Congratulations! You guessed correctly!", Toast.LENGTH_SHORT);
 
     }
 
