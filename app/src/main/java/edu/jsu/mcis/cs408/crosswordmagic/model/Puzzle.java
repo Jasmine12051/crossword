@@ -1,9 +1,18 @@
 package edu.jsu.mcis.cs408.crosswordmagic.model;
 
+
+import static androidx.core.content.ContentProviderCompat.requireContext;
+
+import android.content.Context;
+import android.util.Log;
+import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.HashSet;
+import android.content.Context;
 
 public class Puzzle {
+
 
     public static final char BLOCK_CHAR = '*';
     public static final char BLANK_CHAR = ' ';
@@ -20,8 +29,12 @@ public class Puzzle {
     private boolean solved = false;
 
     private final StringBuilder cluesAcrossBuffer, cluesDownBuffer;
+    private Context context;
+
+
 
     public Puzzle(HashMap<String, String> params) {
+
 
         this.name = params.get("name");
         this.description = params.get("description");
@@ -119,6 +132,9 @@ public class Puzzle {
             if (across.getWord().equals(guess) && !(guessed.contains(acrossKey))) {
                 result = WordDirection.ACROSS;
                 addWordToGuessed(acrossKey);
+                Toast toast = Toast.makeText(context, "Congratulations! You guessed correctly!", Toast.LENGTH_SHORT);
+                toast.show();
+
             }
         }
 
@@ -126,6 +142,9 @@ public class Puzzle {
             if (down.getWord().equals(guess) && !(guessed.contains(downKey))) {
                 result = WordDirection.DOWN;
                 addWordToGuessed(downKey);
+                Log.d("testing", "you answer was right");
+                Toast toast = Toast.makeText(context, "Congratulations! You guessed correctly!", Toast.LENGTH_LONG);
+                toast.show();
             }
         }
 
@@ -180,6 +199,7 @@ public class Puzzle {
         }
 
     }
+
 
     public Word getWord(String key) {
         return words.get(key);

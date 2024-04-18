@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import java.beans.PropertyChangeEvent;
+import java.util.HashMap;
 import java.util.Locale;
 
 import edu.jsu.mcis.cs408.crosswordmagic.R;
@@ -312,9 +313,10 @@ public class CrosswordGridView extends View implements AbstractView {
                         @Override
                         public void onClick(DialogInterface dialog, int which) { // Changed 'd' to 'dialog' and 'i' to 'which'
                             userInput = input.getText().toString();
-
-                            controller.setUserInput(userInput);
-                            controller.setSelectedBox(n);
+                            HashMap<String, String> params  = new HashMap<String, String>();
+                            params.put("guess", userInput);
+                            params.put("num", String.valueOf(n));
+                            controller.setGuess(params);
                         }
                     });
                     builder.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

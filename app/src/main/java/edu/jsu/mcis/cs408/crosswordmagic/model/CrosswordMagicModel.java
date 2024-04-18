@@ -2,6 +2,8 @@ package edu.jsu.mcis.cs408.crosswordmagic.model;
 
 import android.content.Context;
 
+import java.util.HashMap;
+
 import edu.jsu.mcis.cs408.crosswordmagic.controller.CrosswordMagicController;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.DAOFactory;
 import edu.jsu.mcis.cs408.crosswordmagic.model.dao.PuzzleDAO;
@@ -59,6 +61,19 @@ public class CrosswordMagicModel extends AbstractModel {
 
     public void getCluesDown() {
         firePropertyChange(CrosswordMagicController.CLUES_DOWN_PROPERTY, null, puzzle.getCluesDown());
+    }
+
+    public void setGuess(HashMap<String, String> params) {
+
+        if (params != null) {
+
+            Integer num = Integer.parseInt(params.get("num"));
+            String guess = params.get("guess").toUpperCase().trim();
+
+            WordDirection result = puzzle.checkGuess(num, guess);
+
+        }
+
     }
 
     public void setUserInput(String userInput) {
